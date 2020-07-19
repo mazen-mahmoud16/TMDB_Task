@@ -9,14 +9,16 @@ import com.example.tmdbtask.models.Movie
 import com.example.tmdbtask.models.MovieResponse
 import com.example.tmdbtask.network.ApiService
 import com.example.tmdbtask.network.RetrofitClient
+import com.example.tmdbtask.repositories.MoviesRepositories
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , MoviesRepositories.MoviesCallback{
 
-    private lateinit var apiService: ApiService
+    //private lateinit var apiService: ApiService
+    val context: Context = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +27,9 @@ class MainActivity : AppCompatActivity() {
 
         var actionBar: ActionBar = supportActionBar!!
         actionBar.title="Movies"
-        apiService = RetrofitClient.getClient().create(ApiService::class.java)
-        val context: Context = this
+
+        /*apiService = RetrofitClient.getClient().create(ApiService::class.java)
+
 
         apiService.getmovies("afbb384baea489e5ae822b9a67778a98")
             .enqueue(object : Callback<MovieResponse> {
@@ -85,6 +88,16 @@ class MainActivity : AppCompatActivity() {
 
                 })
 
+        }*/
+        popular.setOnClickListener() {
+            MoviesRepositories.getmovies(this)
+        }
+        topRated.setOnClickListener() {
+            MoviesRepositories.getmovies2(this)
         }
     }
-}
+
+    override fun onMoviesReady(movies: List<Movie>) {
+            main_recycler.adapter = MoviesAdapter(context,movies)
+        }
+    }
