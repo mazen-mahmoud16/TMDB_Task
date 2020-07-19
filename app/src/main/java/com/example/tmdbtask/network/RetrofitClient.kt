@@ -1,4 +1,4 @@
-package com.example.tmdbtask
+package com.example.tmdbtask.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

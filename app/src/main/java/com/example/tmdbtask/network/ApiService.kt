@@ -1,4 +1,4 @@
-package com.example.tmdbtask
+package com.example.tmdbtask.network
 
 import com.example.tmdbtask.models.MovieResponse
 import retrofit2.Call

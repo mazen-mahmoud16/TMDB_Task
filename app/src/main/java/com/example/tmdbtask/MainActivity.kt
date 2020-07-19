@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import com.example.tmdbtask.models.Movie
 import com.example.tmdbtask.models.MovieResponse
+import com.example.tmdbtask.network.ApiService
+import com.example.tmdbtask.network.RetrofitClient
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
