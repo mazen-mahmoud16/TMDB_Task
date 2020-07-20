@@ -13,14 +13,25 @@ import retrofit2.Response
 
 object MoviesRepositories {
 
+
     private val apiService = RetrofitClient.getClient().create(ApiService::class.java)
 
     private const val apiKey = "afbb384baea489e5ae822b9a67778a98"
 
     private var moviesList: MutableList<Movie> = mutableListOf()
 
+    private var moviesList2: MutableList<Movie> = mutableListOf()
+
+
+
     fun getMovies(): LiveData<List<Movie>> {
+
         val moviesListLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
+
+        if (moviesList.size > 0) {
+            moviesListLiveData.postValue(moviesList)
+            return moviesListLiveData
+        }
 
         apiService.getmovies(apiKey).enqueue(object : Callback<MovieResponse> {
 
@@ -28,7 +39,6 @@ object MoviesRepositories {
 
                 if (response.isSuccessful) {
                     val remoteMoviesList: List<Movie> = response.body()?.results ?: listOf()
-                    moviesList = mutableListOf()
                     moviesList.addAll(remoteMoviesList)
                     moviesListLiveData.postValue(moviesList)
                 }
@@ -43,8 +53,14 @@ object MoviesRepositories {
     }
 
     fun getMovies2(): LiveData<List<Movie>> {
+
         val moviesListLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
 
+
+        if (moviesList2.size > 0) {
+            moviesListLiveData.postValue(moviesList2)
+            return moviesListLiveData
+        }
 
         apiService.getmovies2(apiKey).enqueue(object : Callback<MovieResponse> {
 
@@ -52,9 +68,9 @@ object MoviesRepositories {
 
                 if (response.isSuccessful) {
                     val remoteMoviesList: List<Movie> = response.body()?.results ?: listOf()
-                    moviesList = mutableListOf()
-                    moviesList.addAll(remoteMoviesList)
-                    moviesListLiveData.postValue(moviesList)
+                    moviesList2 = mutableListOf()
+                    moviesList2.addAll(remoteMoviesList)
+                    moviesListLiveData.postValue(moviesList2)
                 }
             }
 

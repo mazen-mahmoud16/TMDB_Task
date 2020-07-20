@@ -12,7 +12,7 @@ import com.example.tmdbtask.models.Movie
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_view.view.*
 
-class MoviesAdapter(val context:Context,private val moviesList:List<Movie>) :
+class MoviesAdapter(private val context:Context, private val moviesList:List<Movie>) :
     RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
 

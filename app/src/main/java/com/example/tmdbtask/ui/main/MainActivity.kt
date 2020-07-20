@@ -15,7 +15,7 @@ import java.util.Observer
 
 class MainActivity : AppCompatActivity() {
 
-    val context: Context = this
+
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
