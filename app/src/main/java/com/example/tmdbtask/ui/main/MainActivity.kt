@@ -31,7 +31,16 @@ class MainActivity : AppCompatActivity() {
                 main_recycler.adapter = MoviesAdapter(this, it)
             })
         }
-
+        if(MoviesRepositories.i==2){
+            mainViewModel.getMovies().observe(this, androidx.lifecycle.Observer {
+                main_recycler.adapter = MoviesAdapter(this, it)
+            })
+        }
+        if(MoviesRepositories.i==3){
+            mainViewModel.getMovies2().observe(this, androidx.lifecycle.Observer {
+                main_recycler.adapter = MoviesAdapter(this, it)
+            })
+        }
         topRated.setOnClickListener() {
             mainViewModel.getMovies2().observe(this, androidx.lifecycle.Observer {
                 main_recycler.adapter = MoviesAdapter(this, it)

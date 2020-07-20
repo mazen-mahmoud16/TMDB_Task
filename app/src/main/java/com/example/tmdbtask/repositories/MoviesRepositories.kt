@@ -22,11 +22,14 @@ object MoviesRepositories {
 
     private var moviesList2: MutableList<Movie> = mutableListOf()
 
+    public var  i:Int = 0;
 
 
     fun getMovies(): LiveData<List<Movie>> {
 
         val moviesListLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
+
+        i=2
 
         if (moviesList.size > 0) {
             moviesListLiveData.postValue(moviesList)
@@ -56,6 +59,8 @@ object MoviesRepositories {
 
         val moviesListLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
 
+        i=3
+
 
         if (moviesList2.size > 0) {
             moviesListLiveData.postValue(moviesList2)
@@ -68,7 +73,6 @@ object MoviesRepositories {
 
                 if (response.isSuccessful) {
                     val remoteMoviesList: List<Movie> = response.body()?.results ?: listOf()
-                    moviesList2 = mutableListOf()
                     moviesList2.addAll(remoteMoviesList)
                     moviesListLiveData.postValue(moviesList2)
                 }
