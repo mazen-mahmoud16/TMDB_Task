@@ -1,6 +1,8 @@
 package com.example.tmdbtask.repositories
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.tmdbtask.models.Movie
 import com.example.tmdbtask.models.MovieResponse
 import com.example.tmdbtask.network.ApiService
@@ -17,7 +19,8 @@ object MoviesRepositories {
 
     private var moviesList: MutableList<Movie> = mutableListOf()
 
-    fun getmovies(moviesCallback: MoviesCallback){
+    fun getMovies(): LiveData<List<Movie>> {
+        val moviesListLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
 
         /*if (moviesList.size > 0) {
             moviesCallback.onMoviesReady(moviesList)
@@ -32,7 +35,8 @@ object MoviesRepositories {
                     val remoteMoviesList: List<Movie> = response.body()?.results ?: listOf()
                     moviesList = mutableListOf()
                     moviesList.addAll(remoteMoviesList)
-                    moviesCallback.onMoviesReady(moviesList)
+                    //moviesCallback.onMoviesReady(moviesList)
+                    moviesListLiveData.postValue(moviesList)
                 }
             }
 
@@ -41,9 +45,11 @@ object MoviesRepositories {
             }
 
         })
+        return moviesListLiveData
     }
 
-    fun getmovies2(moviesCallback: MoviesCallback){
+    fun getMovies2(): LiveData<List<Movie>> {
+        val moviesListLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
 
         /*if (moviesList.size > 0) {
             moviesCallback.onMoviesReady(moviesList)
@@ -58,7 +64,8 @@ object MoviesRepositories {
                     val remoteMoviesList: List<Movie> = response.body()?.results ?: listOf()
                     moviesList = mutableListOf()
                     moviesList.addAll(remoteMoviesList)
-                    moviesCallback.onMoviesReady(moviesList)
+                    //moviesCallback.onMoviesReady(moviesList)
+                    moviesListLiveData.postValue(moviesList)
                 }
             }
 
@@ -67,10 +74,7 @@ object MoviesRepositories {
             }
 
         })
+        return moviesListLiveData
     }
 
-    //*******************************************************************************************
-    interface MoviesCallback {
-        fun onMoviesReady(movies: List<Movie>)
-    }
 }

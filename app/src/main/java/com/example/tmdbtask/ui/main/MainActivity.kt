@@ -4,15 +4,20 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.ActionBar
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.lifecycle.observe
 import com.example.tmdbtask.R
 import com.example.tmdbtask.models.Movie
 import com.example.tmdbtask.repositories.MoviesRepositories
+import com.example.tmdbtask.repositories.MoviesRepositories.getMovies
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.Observer
 
-class MainActivity : AppCompatActivity() , MoviesRepositories.MoviesCallback{
+class MainActivity : AppCompatActivity() {
 
     //private lateinit var apiService: ApiService
     val context: Context = this
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +25,7 @@ class MainActivity : AppCompatActivity() , MoviesRepositories.MoviesCallback{
 
 
         val actionBar: ActionBar = supportActionBar!!
-        actionBar.title="Movies"
+        actionBar.title = "Movies"
 
         /*apiService = RetrofitClient.getClient().create(ApiService::class.java)
 
@@ -84,15 +89,16 @@ class MainActivity : AppCompatActivity() , MoviesRepositories.MoviesCallback{
 
         }*/
         popular.setOnClickListener() {
-            MoviesRepositories.getmovies(this)
+            mainViewModel.getMovies().observe(this, androidx.lifecycle.Observer {
+                main_recycler.adapter = MoviesAdapter(this, it)
+            })
         }
-        topRated.setOnClickListener() {
-            MoviesRepositories.getmovies2(this)
-        }
-    }
 
-    override fun onMoviesReady(movies: List<Movie>) {
-            main_recycler.adapter =
-                MoviesAdapter(context, movies)
+
+        topRated.setOnClickListener() {
+            mainViewModel.getMovies2().observe(this, androidx.lifecycle.Observer {
+                main_recycler.adapter = MoviesAdapter(this, it)
+            })
         }
     }
+}
