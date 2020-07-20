@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#393A42"
     android:paddingTop="15dp"
-    tools:context=".MainActivity">
+    tools:context=".ui.main.MainActivity">
 
 
     <Button

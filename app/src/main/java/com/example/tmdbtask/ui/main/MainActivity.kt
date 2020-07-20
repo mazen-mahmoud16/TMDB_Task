@@ -1,19 +1,13 @@
-package com.example.tmdbtask
+package com.example.tmdbtask.ui.main
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.ActionBar
 import android.os.Bundle
-import android.util.Log
+import com.example.tmdbtask.R
 import com.example.tmdbtask.models.Movie
-import com.example.tmdbtask.models.MovieResponse
-import com.example.tmdbtask.network.ApiService
-import com.example.tmdbtask.network.RetrofitClient
 import com.example.tmdbtask.repositories.MoviesRepositories
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() , MoviesRepositories.MoviesCallback{
 
@@ -25,7 +19,7 @@ class MainActivity : AppCompatActivity() , MoviesRepositories.MoviesCallback{
         setContentView(R.layout.activity_main)
 
 
-        var actionBar: ActionBar = supportActionBar!!
+        val actionBar: ActionBar = supportActionBar!!
         actionBar.title="Movies"
 
         /*apiService = RetrofitClient.getClient().create(ApiService::class.java)
@@ -98,6 +92,7 @@ class MainActivity : AppCompatActivity() , MoviesRepositories.MoviesCallback{
     }
 
     override fun onMoviesReady(movies: List<Movie>) {
-            main_recycler.adapter = MoviesAdapter(context,movies)
+            main_recycler.adapter =
+                MoviesAdapter(context, movies)
         }
     }

@@ -1,10 +1,11 @@
-package com.example.tmdbtask
+package com.example.tmdbtask.ui.description
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_description.*
 import androidx.appcompat.app.ActionBar
+import com.example.tmdbtask.R
 
 class Description : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
