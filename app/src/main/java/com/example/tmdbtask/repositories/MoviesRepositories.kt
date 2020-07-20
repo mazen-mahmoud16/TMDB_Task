@@ -22,11 +22,6 @@ object MoviesRepositories {
     fun getMovies(): LiveData<List<Movie>> {
         val moviesListLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
 
-        /*if (moviesList.size > 0) {
-            moviesCallback.onMoviesReady(moviesList)
-            return
-        }*/
-
         apiService.getmovies(apiKey).enqueue(object : Callback<MovieResponse> {
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
@@ -35,7 +30,6 @@ object MoviesRepositories {
                     val remoteMoviesList: List<Movie> = response.body()?.results ?: listOf()
                     moviesList = mutableListOf()
                     moviesList.addAll(remoteMoviesList)
-                    //moviesCallback.onMoviesReady(moviesList)
                     moviesListLiveData.postValue(moviesList)
                 }
             }
@@ -51,10 +45,6 @@ object MoviesRepositories {
     fun getMovies2(): LiveData<List<Movie>> {
         val moviesListLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
 
-        /*if (moviesList.size > 0) {
-            moviesCallback.onMoviesReady(moviesList)
-            return
-        }*/
 
         apiService.getmovies2(apiKey).enqueue(object : Callback<MovieResponse> {
 
@@ -64,7 +54,6 @@ object MoviesRepositories {
                     val remoteMoviesList: List<Movie> = response.body()?.results ?: listOf()
                     moviesList = mutableListOf()
                     moviesList.addAll(remoteMoviesList)
-                    //moviesCallback.onMoviesReady(moviesList)
                     moviesListLiveData.postValue(moviesList)
                 }
             }
